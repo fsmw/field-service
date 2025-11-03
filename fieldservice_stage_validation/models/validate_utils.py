@@ -14,11 +14,11 @@ def validate_stage_fields(records):
 
         for name in field_names:
             if not values[0][name]:
+                # Use direct string instead of _() to avoid translation issues during module loading
                 raise ValidationError(
-                    _(
-                        "Cannot move to stage %(stage_name)s "
-                        "until the %(name)s field is set.",
-                        stage_name=stage.name,
-                        name=name,
-                    )
+                    "Cannot move to stage %(stage_name)s "
+                    "until the %(name)s field is set." % {
+                        'stage_name': stage.name,
+                        'name': name,
+                    }
                 )
