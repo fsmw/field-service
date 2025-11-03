@@ -59,6 +59,9 @@ class TestFSMRepairCommon(TransactionCase):
                 "quantity": 100,
             }
         )
+        # Set current_stock_location_id explicitly (as done in 17.0)
+        cls.equipment_1.current_stock_location_id = cls.stock_location.id
+        cls.equipment_2.current_stock_location_id = cls.stock_location.id
 
     def _prepare_fsm_order_vals(self, equipments):
         return {
